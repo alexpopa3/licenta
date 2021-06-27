@@ -1,0 +1,204 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">  
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
+</head>           
+   <style>
+     .div1{
+       margin-left: 50px;
+       margin-top: 100 px;
+     }
+     .div2{
+      margin-left: 150px;
+    }
+    .div3{
+      margin-left: 300px;
+    }
+    body{
+        background:#eee;
+    }
+    .img2 {
+      border-radius: 50%;
+    }
+   </style>
+<body>
+
+
+  
+ 
+
+<!-- Header -->
+<header class="w3-container w3-center" style="padding:128px 16px; margin-bottom: 200px;">
+    <h1 class="w3-margin w3-jumbo"><img src="{% static 'student/logo.png' %}" width="200" height="200" class="d-inline-block align-top img2"></h1><br>
+    <p class="w3-xlarge">Welcome to Secretariat certificate generator<br>This portal represents not only a platform that facilitates the acquirement of certificates,
+        but it also <br> facilitates the communication between the student and Secretariat through a forum. <br><b>Thank you for using our platform!</p>
+            {% if user.is_authenticated %}
+            {% else %}
+            <br>
+            <a href="{% url 'two_factor:login' %}"><button class="btn btn-success w3-animate-zoom w3-padding-large w3-round-xxlarge" >Login</button></a>
+            {% endif %}
+  </header>
+  
+  <!-- First Grid -->
+<div class=" w3-padding-32 w3-container " style="background-color: rgb(236, 222, 222);">
+    
+      <div class="w3-third div1" >
+    
+        <h1>Account</h1>
+        <h4 class="w3-padding-32 ">In this section, you can:<br><br>
+          <li>change the password by accessing the "Change Password" page located in the "Account" dropdown button;</li><br>
+          <li>enable two-factor authentication for a more secure login; </li> <br>
+          <li>link your smartphone with the account using Google Authenticator application; </li> <br>
+          <li>modify the two-factor settings.</li>
+        </h4>
+  
+      </div>
+      <div class="w3-third w3-container w3-padding-64 div2">
+          <div id="carousel" style="width: 750px; height: 380px;" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel" data-slide-to="1"></li>
+              <li data-target="#carousel" data-slide-to="2"></li>
+              <li data-target="#carousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" >
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{% static 'tutorial/change password.png' %}" alt="change password">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'tutorial/enable two.png' %}" alt="enable two factor">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'tutorial/token2.png' %}" alt="token">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="{% static 'tutorial/account_security.png' %}" alt="account security">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+    </div>
+      
+</div>
+    
+
+
+  
+  <!-- Second Grid -->
+  <div class=" w3-padding-32 w3-container " style="background-color: #eee;">
+    
+    <div class="w3-third div1" >
+  
+
+      <div id="carousel2" style="width: 750px; height: 380px;" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel2" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel2" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner" >
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{% static 'tutorial/generate certificates.png' %}" alt="generate certificates">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{% static 'tutorial/adeverinta.png' %}" alt="adeverinta">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-padding-64 div3">
+      <h1>Generate Certificate</h1>
+      <h4 class="w3-padding-32 ">Here, you can:<br><br>
+        <li>input the reason for the certificate;</li><br>
+        <li>view and download the signed and stamped certificate. </li> <br>
+      
+      </h4>
+  </div>
+    
+</div>  
+  
+  <!-- Third Grid -->
+  <div class=" w3-padding-32 w3-container " style="background-color: rgb(236, 222, 222);">
+    
+    <div class="w3-third div1" >
+  
+      <h1>ASK & View Questions</h1><br>
+      <h4 class="w3-padding-32 ">From here, you can:<br><br><br>
+        <li>input the question for Secretariat;</li><br>
+        <li>view and delete your own questions;</li><br>
+        <li>view all the posted questions. </li> <br>
+    </div>
+    <div class="w3-third w3-container w3-padding-64 div2">
+        <div id="carousel3" style="width: 750px; height: 380px;" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel3" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel3" data-slide-to="1"></li>
+            <li data-target="#carousel3" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" >
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="{% static 'tutorial/ASK.png' %}" alt="ASK">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="{% static 'tutorial/all mine.png' %}" alt="user's questions">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="{% static 'tutorial/view questions.png' %}" alt="view questions">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carousel3" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carousel3" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+  </div>
+    
+</div>
+  
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+    <div class="w3-padding-10">
+        <p class="contact text-muted">For any king troubles, please contact: alexandru.popa1004@stud.etti.upb.ro</p>
+
+   </div>
+   
+  </footer>
+  
+  
+  
+  </body>
+  </html>
+  {% endblock %}

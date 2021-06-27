@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        
+        <link rel="icon" type="image/png" href="{% static 'student/logo1.png' %}">
+        <style>
+            .dropbtn {
+            
+             background-color: rgb(43, 92, 226);
+              cursor: pointer;
+              border: none;
+              border-radius: 20px;
+            color:white;
+            padding: 9px;
+            }
+            .img2 {
+              border-radius: 50%;
+            }
+            
+            .dropbtn:focus {
+                background-color: rgb(43, 92, 226);
+                border: none;
+                
+              }
+            .dropdown {
+              position: relative;
+              right:15px;
+              display: inline-block;
+              border: none;
+            }
+            .img1 {
+              border-radius: 0%;
+            }
+
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              right:10px;
+              background-color: #f1f1f1;
+              min-width: 160px;
+              overflow: auto;
+              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+              z-index: 1;
+              border: none;
+            }
+            
+            .dropdown-content a {
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+            }
+            .nev{
+              background-color: rgb(43, 92, 226);
+            }
+            
+            .dropdown a:hover {background-color: #ddd;}
+            
+            .show {display: block;}
+            </style>
+            </head>
+            <body>
+            
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-default nev">
+    <a class="navbar-brand" href="{% url 'students:home' %}">
+        <img class="img1" src="{% static 'student/logo1.png' %}" width="30" height="30" class="d-inline-block align-top">
+    <span>Secretariat</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <ul class="nav justify-content">
+          {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'students:input_reason' %}">Generate Certificate</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'students:question' %}">ASK</a>
+            </li>  
+            {% endif %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'students:forum' %}">View questions</a>
+            </li>
+        </ul>
+    </ul>
+        <ul class="nav navbar-nav navbar-right">
+       
+            <div class="dropdown">
+            
+                <button onclick="myFunction()" class="dropbtn"  style="outline: none">Account</button>
+                <div id="myDropdown" class="dropdown-content">
+                  {% if user.is_authenticated %}
+                      <a class="dropdown-item"  href="{% url 'students:change_password' %}">Change Password</a>
+                      <a class="dropdown-item"  href="{% url 'two_factor:profile' %}">Security</a>
+                      <div class="dropdown-divider"></div>
+                          <a href="#" onClick="document.getElementById('logoutform').submit()" class="dropdown-item">Logout</a>
+                          <form id="logoutform" method="POST" action="{% url 'students:logoutuser' %}">
+                              {% csrf_token %}
+                          <input type="hidden">
+                          </form>
+                  {% else %}    
+                      <a class="dropdown-item"  href="{% url 'two_factor:login' %}">Login</a>
+                      <a class="dropdown-item" href="{% url 'password_reset' %}" class="btn btn-primary">Forgot password?</a>
+                  {% endif %}
+                  </div>
+                  <script>
+                    /* When the user clicks on the button, 
+                    toggle between hiding and showing the dropdown content */
+                    function myFunction() {
+                      document.getElementById("myDropdown").classList.toggle("show");
+                    }
+                    
+                    // Close the dropdown if the user clicks outside of it
+                    window.onclick = function(event) {
+                      if (!event.target.matches('.dropbtn')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                          var openDropdown = dropdowns[i];
+                          if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                          }
+                        }
+                      }
+                    }
+                    </script>
+              </div>
+        </ul>
+              
+          
+        
+    </div>
+</nav>
+
+
+
+
+    {% block content %}
+    {% endblock %}
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</body>
+</html>

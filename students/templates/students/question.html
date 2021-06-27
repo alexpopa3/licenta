@@ -1,0 +1,40 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+  .mijloc{
+      margin-top: 50px;
+  }
+  body{
+      background:#eee;
+  }
+</style>
+<body>
+  <div class="w3-panel w3-padding-large w3-opacity">
+  <h5>You have {{questions.count}} question{{ questions.count|pluralize }} posted<br>
+    {% if questions %}<a href="{% url 'students:all_mine' %}">See them all</a>{% endif %}</h5></div>
+<div class="row justify-content-center mt-5">
+  <div class="form-group mijloc">
+      <form method="POST">
+          {% csrf_token %}
+          <div class="row justify-content-center mt-5">
+              <div class="form-group">
+                  <label for="question">Question</label>
+                  <textarea type="text" name="question" class="form-control" id="question" required></textarea>
+              </div>
+          </div>
+          <div class="form-group form-check">
+              <input type="checkbox" name="only_for_me" class="form-check-input" id="only_for_me">
+              <label class="form-check-label" for="only_for_me">Only for me</label>
+          </div>
+          <div class="form-group form-check">
+              <input type="checkbox" name="anonymous" class="form-check-input" id="anonymous">
+              <label class="form-check-label" for="anonymous">Anonymous</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Post it</button>
+      </form>
+  </div>
+</div>
+</body>
+{% endblock %}

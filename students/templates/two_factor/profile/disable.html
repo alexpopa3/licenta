@@ -1,0 +1,23 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+
+{% block content %}
+<style>
+    .maijos{
+      margin-top: 150px;
+      margin-left: 420px;
+    }
+  </style>
+  <div class="w3-animate-zoom w3-half w3-center w3-blue w3-padding-large w3-round-xxlarge maijos">
+  <h1>{% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}</h1>
+  <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This
+    weakens your account security, are you sure?{% endblocktrans %}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button class="btn btn-danger"
+            type="submit">{% trans "Disable" %}</button>
+  </form>
+  </div>
+{% endblock %}

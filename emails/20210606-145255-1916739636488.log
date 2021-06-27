@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: da@da.com
+Date: Sun, 06 Jun 2021 11:52:55 -0000
+Message-ID: <162298037520.20448.15104890957735899517@DESKTOP-PGIRGDP>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/students/password_reset_confirm/MQ/anttc7-94bd7e420428206785925803b56463fc/
+
+Your username, in case you’ve forgotten: alex
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

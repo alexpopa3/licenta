@@ -1,0 +1,14 @@
+{% load i18n %}
+
+
+
+
+<div class="stanga">
+  {% if cancel_url %}
+    <a href="{{ cancel_url }}"
+       class=" btn w3-red w3-padding-large w3-round-xxlarge">{% trans "Cancel" %}</a>
+  {% endif %}
+  </div>
+  <div class="dreapta">
+  <button type="submit" class=" btn w3-green w3-padding-large w3-round-xxlarge">{% trans "Next" %}</button>
+</div>

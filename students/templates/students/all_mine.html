@@ -1,0 +1,77 @@
+{% extends 'students/base.html' %}
+{% load static %}
+{% block content %}
+  
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+    <style>
+         body{
+          background:#eee;
+      }
+     
+    
+      .blog-comment {
+        background: #eee;
+        color: #6b6e80;
+      }
+      .post-comments .meta {
+        color:green;
+        font-size: 22px;
+      }
+      .blog-comment .meta {
+        color:green;
+        font-size: 22px;
+      }
+      .blog-comment .ma {
+        color:black;
+        font-size: 26px;
+      }
+      .blog-comment h1{
+          color: red;
+      }
+      hr{
+          color: black;
+      }
+      .blog-comment h5{
+          margin-bottom: 40px;
+          font-size: 26px;
+          line-height: 30px;
+          font-weight: 80;
+      }
+      
+      </style>
+
+</head>
+<div class="w3-container w3-center" style="padding:28px 16px">
+    {% for question in questions %}
+        <div class="post-preview">
+            <div class="center">
+                <h2 class="post-title">
+                {{ question.question|striptags|truncatechars:70 }}</h2>
+                <h5>posted on {{ question.posted|date:'d M Y'|upper }}</h5>
+                    <div class="post-comments">
+                        {% if question.answer %}
+                            <h2 class="meta">Answer: {{ question.answer|striptags|truncatechars:70 }}</h2>
+                            <p >answered on: {{ question.answered|date:'d M Y'|upper }} </p>
+                        {% endif %}
+                    
+                    </div>
+            </div>
+        </div>
+        <form action="{% url 'students:delete_question1' question.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+        _________________________________________________________________________________________________
+        <br>
+    {% endfor %}
+</div>
+</html>
+    {% endblock %}

@@ -1,0 +1,83 @@
+{% extends "two_factor/_base.html" %}
+{% load i18n two_factor %}
+
+{% block content %}
+<style>
+
+  .mijloc{
+    margin-top: 180px;
+    margin-left: 530px;
+}
+.mijloc1{
+  margin-top: 40px;
+  margin-left: 70px;
+}
+body{
+    background:#eee;
+}
+.stanga{
+  position: relative;
+  right:180px;  
+  top: 40px;
+}
+.dreapta{
+  position: relative;
+  left: 180px;
+  bottom: 7px;
+}
+  
+  
+
+</style>
+
+<body>
+  <div class="mijloc">
+    <div class="w3-animate-zoom w3-half w3-center w3-blue w3-padding-large w3-round-xxlarge">
+      <h1>{% block title %}{% trans "Login" %}{% endblock %}</h1>
+        {% if wizard.steps.current == 'auth' %}
+          <p>{% blocktrans %}Enter your credentials.{% endblocktrans %}</p>
+          {% endif %}
+      
+
+            <form action="" method="post"><div class="mijloc1">
+              {% csrf_token %}
+              {% include "two_factor/_wizard_forms.html" %}
+              
+              {# hidden submit button to enable [enter] key #}
+              <input type="submit" value="" class="d-none" />
+              </div>
+              {% if other_devices %}
+                <p>{% trans "Or, alternatively, use one of your backup phones:" %}</p>
+                <p>
+                  {% for other in other_devices %}
+                  <button name="challenge_device" value="{{ other.persistent_id }}"
+                          class="btn btn-secondary btn-block" type="submit">
+                    {{ other|device_action }}
+                  </button>
+                {% endfor %}</p>
+              {% endif %}
+              {% if backup_tokens %}
+                <p>{% trans "As a last resort, you can use a backup token:" %}</p>
+                <p>
+                  <button name="wizard_goto_step" type="submit" value="backup"
+                          class="btn btn-secondary btn-block">{% trans "Use Backup Token" %}</button>
+                </p>
+              {% endif %}
+              
+              {% include "two_factor/_wizard_actions_login.html" %} 
+              
+              
+            </form>
+          </div>
+          
+    </div>
+  </div>
+    
+
+
+
+
+  </body>
+
+{% endblock %}
+

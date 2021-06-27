@@ -1,0 +1,76 @@
+{% extends 'students/base.html' %}
+{% block content %}
+
+<style>
+    .center  {
+        
+        margin-left: 80px;
+        position: fixed;
+        
+        top:250px;
+        left:100 px;
+        
+        
+      }
+    body{
+      background:#eee;
+  }
+
+
+  
+  .blog-comment {
+    background: #eee;
+    color: #6b6e80;
+   
+ 
+  }
+  
+  
+  .post-comments .meta {
+    color:green;
+    font-size: 22px;
+  }
+  .blog-comment .ma {
+    color:green;
+    font-size: 26px;
+  }
+  .blog-comment h1{
+      color: black;
+  }
+  
+  .blog-comment h5{
+      margin-bottom: 40px;
+      font-size: 26px;
+      line-height: 30px;
+      font-weight: 80;
+  }
+  </style>
+  <div class="center">
+    
+        
+        <div class="blog-comment">
+            
+                <h1>{{ question.question }}</h1>
+                <h5>posted on {{ question.posted|date:'d M Y'|upper }}{% if question.anonymous %} {% else %} by {{ question.question_author }}{% endif %}</h5>
+                        <hr/>
+                        {% if question.answer %}
+                        <p class="meta">{{ question.answered|date:'d M Y'|upper }} </p>
+                            <p class="ma">Answer:<i> {{ question.answer }}</i></p>
+                        {% endif %}
+         </div>
+         {% if user.is_authenticated %}
+            {% if question.user == user %}
+                <form action="{% url 'students:delete_question' question.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+  
+
+
+
+
+
+{% endblock %}

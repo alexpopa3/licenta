@@ -1,0 +1,28 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<style>
+    .mijloc{
+        margin-top: 160px;
+    }
+    body{
+        background:#eee;
+    }
+</style>
+<body>
+<div class="w3-panel w3-padding-large w3-opacity">
+<h5>I have <b>{{reason_all.count}}</b> generated certificate{{ reason_all.count|pluralize }}</h5></div>
+<div class="form-group mijloc ">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row justify-content-center mt-5">
+            <div class="form-group">
+                <label for="reason">Reason</label>
+                <textarea type="text" name="reason" class="form-control" id="reason" required></textarea>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button> 
+            </div>
+        </div>   
+    </form>
+</div>
+</body>
+{% endblock %}

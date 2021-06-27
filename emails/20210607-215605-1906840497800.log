@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: alexandru.popa1004@stud.etti.upb.ro
+Date: Mon, 07 Jun 2021 18:56:05 -0000
+Message-ID: <162309216508.13540.3453861020229999505@DESKTOP-PGIRGDP>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/password_reset_confirm/Mw/anw7lh-6af5458a0b37ba7f88f78d5a63e02ac0/
+
+Your username, in case you’ve forgotten: 1980410090027
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

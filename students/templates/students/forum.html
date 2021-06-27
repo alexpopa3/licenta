@@ -1,0 +1,132 @@
+{% extends 'students/base.html' %}
+{% load static %}
+{% block content %}
+  
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+    <style>
+         body{
+          background:#eee;
+      }
+     
+    
+      .blog-comment {
+        background: #eee;
+        color: #6b6e80;
+      }
+      .post-comments .meta {
+        color:green;
+        font-size: 22px;
+      }
+      .blog-comment .meta {
+        color:green;
+        font-size: 22px;
+      }
+      .blog-comment .ma {
+        color:black;
+        font-size: 26px;
+      }
+      .blog-comment h1{
+          color: red;
+      }
+      hr{
+          color: black;
+      }
+      .blog-comment h5{
+          margin-bottom: 40px;
+          font-size: 26px;
+          line-height: 30px;
+          font-weight: 80;
+      }
+      
+      </style>
+
+</head>
+
+<body>
+
+
+<!-- Main Content --> 
+
+<div class="w3-container w3-center" style="padding:28px 16px">
+    <h1 class="w3-margin w3-jumbo"><img src="{% static 'student/logo.png' %}" width="200" height="200" class="d-inline-block align-top img2"></h1>
+   <h1>Forum</h1>
+   <h3>Forum platform for communication between students and Secretariat.</h3>
+  <hr>
+<h5>There are {{questions.count}} question{{ questions.count|pluralize }}</h5>
+
+{% if questions %}
+_________________________________________________________________________________________________
+                            <br>
+    {% for question in questions %}
+        {% if question.only_for_me %}
+            {% if user.is_authenticated %}
+                {% if question.user == user %}
+                    <div class="post-preview">
+                        <h2 class="post-title">
+                        <a href= "{% url 'students:detail_question' question.id %}">{{ question.question|striptags|truncatechars:70 }}</a></h2>
+                        <div class="w3-container w3-margin-left">
+                        <h5>posted on {{ question.posted|date:'d M Y'|upper }}</h5>
+                    </div></div>
+                                
+                    <div class="post-comments">
+                        {% if question.answer %}
+                            <h2 class="meta">Answer: {{ question.answer|striptags|truncatechars:70 }}</h2>
+                            <p >answered on: {{ question.answered|date:'d M Y'|upper }} </p>                       
+                        {% endif %}
+                        _________________________________________________________________________________________________
+                            <br>
+                    </div>
+
+                {% endif %}
+            {% endif %} 
+        {% else %}
+                {% if question.anonymous %}
+                    <div class="post-preview">
+                        <div class="center">
+                            <h2 class="post-title">
+                            <a href= "{% url 'students:detail_question' question.id %}">{{ question.question|striptags|truncatechars:70 }}</a></h2>
+                            <h5>posted on {{ question.posted|date:'d M Y'|upper }}</h5>
+                                <div class="post-comments">
+                                    {% if question.answer %}
+                                        <h2 class="meta">Answer: {{ question.answer|striptags|truncatechars:70 }}</h2>
+                                        <p >answered on: {{ question.answered|date:'d M Y'|upper }} </p>
+                                    {% endif %}
+                                    _________________________________________________________________________________________________
+                            <br>
+                                </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="post-preview">
+                        <h2 class="post-title">
+                        <a href= "{% url 'students:detail_question' question.id %}">{{ question.question|striptags|truncatechars:70 }}</a></h2>
+                        <h5>posted on {{ question.posted|date:'d M Y'|upper }} by {{ question.question_author }} </h5> 
+                        <div class="post-comments">
+                            {% if question.answer %}
+                                <h3 class="meta">Answer: {{ question.answer|striptags|truncatechars:70 }}</h3>
+                                <p >answered on: {{ question.answered|date:'d M Y'|upper }} </p>
+                            {% endif %}
+                            _________________________________________________________________________________________________
+                            <br>
+                        </div>
+                    </div>
+                {% endif %}
+        {% endif %}
+                <hr>
+    {% endfor %}
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
+{% endblock %}
